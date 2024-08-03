@@ -40,7 +40,10 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', headerShown: true, title: 'Settings' }} />
+        <Stack.Screen name="taskForm" options={{ presentation: 'modal', headerShown: true, title: 'Task Form' }} />
+
       </Stack>
+
     // </ThemeProvider>
   );
 }
