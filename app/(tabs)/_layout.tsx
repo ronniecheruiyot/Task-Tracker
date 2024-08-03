@@ -18,6 +18,8 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        headerTitleStyle: {marginHorizontal: 25},
+        headerStyle: { backgroundColor: '#edfbef' }
         // headerShown: true,
       }}>
       <Tabs.Screen
@@ -44,8 +46,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
+          title: 'Tasks',
+          tabBarIcon: ({ color }) => <TabBarIcon name="pencil-square" color={color} />,
         }}
       />
     

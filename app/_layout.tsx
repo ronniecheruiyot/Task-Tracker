@@ -32,7 +32,12 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName="(tabs)">
+      <Stack initialRouteName="(tabs)"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#edfbef' }, // Set global header background color
+          // headerTitleStyle: { fontWeight: 'bold' },   // Set global header title style
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', headerShown: true, title: 'Settings' }} />
       </Stack>

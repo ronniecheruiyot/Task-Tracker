@@ -4,10 +4,10 @@
     "slug": "taskTracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./images/assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./images/assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
