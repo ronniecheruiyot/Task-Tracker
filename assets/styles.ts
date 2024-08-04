@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
       borderRadius: 20,
       alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: 'gray',
+      backgroundColor: '#edfbef',
       margin: 10,
       elevation: 20
     },
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
       alignItems: "center",
       borderRadius: 100,
       position: "absolute",
-      bottom: 15,
+      bottom: 10,
       right: 35,
       backgroundColor: "#26653A",
       // padding: 20,
@@ -85,8 +85,23 @@ export const styles = StyleSheet.create({
     input: {
       borderColor: "gray",
       width: "100%",
-      borderWidth: 1,
+      borderWidth: 0.5,
       borderRadius: 10,
       padding: 10,
+      fontSize: 16,
+      letterSpacing: 1
     },
+    inputTitle: {
+      marginBottom: 5,
+      color: "#009F93",
+      fontSize: 18,
+      fontWeight: 'medium',
+      letterSpacing: 1
+    },
+    inputView: {
+      display: "flex",
+      flexDirection: 'column',
+      marginBottom: 15,
+    
+    }
   });

@@ -3,6 +3,9 @@ import Svg, { Line } from 'react-native-svg';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle, View, Image } from 'react-native';
 import { styles } from '../assets/styles';
 import Colors from './Colors';
+import Modal from "react-native-modal";
+import CalendarPicker from 'react-native-calendar-picker';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 interface RoundButtonProps {
   title: string;
@@ -82,4 +85,27 @@ export function NoDataFound() {
         <Text style={{fontWeight: 300, textAlign: 'center', letterSpacing: 1}}>No data found!</Text>
     </View>
   );
+}
+
+export function DatePicker (){
+  return (
+    <>
+      <View>
+        <Modal isVisible={false}>
+          <View style={{backgroundColor: '#fff', height: '50%', paddingHorizontal: 20}}>
+            <View>
+              <CalendarPicker onDateChange={() => {}} />
+            </View>
+          </View>
+        </Modal>
+      </View>
+    </>
+  )
+}
+
+export function IconDetails(props: {
+  name: React.ComponentProps<typeof FontAwesome>['name'];
+  color: string;
+}) {
+  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }

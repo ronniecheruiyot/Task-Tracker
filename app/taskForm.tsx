@@ -5,6 +5,8 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { styles } from "../assets/styles";
 import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import Colors from "../constants/Colors";
+import CalendarPicker from "react-native-calendar-picker";
+import { DatePicker, IconDetails } from "../constants/utils";
 
 export default function IssuesForm(){
     const navigation = useNavigation();
@@ -58,32 +60,20 @@ export default function IssuesForm(){
     return (
         <View style={styles.listContainer}>
                   <View >
-                      <Text style={{marginVertical: 30, fontSize: 25, fontWeight: 700, letterSpacing: 1}}>{action === "Create" ? "New Issue" : "Edit"}</Text>
+                      <Text style={{marginVertical: 30, fontSize: 25, fontWeight: 700, letterSpacing: 1}}>{action === "Create" ? "New Task" : "Edit Task"}</Text>
                       <View>
                         
-                        <View
-                              style={{
-                                  display: "flex",
-                                  flexDirection: 'column',
-                                  marginBottom: 5
-                              }}
-                          >
-                          <Text style={{marginBottom: 3, color: "#009F93"}}>Title:</Text>
+                        <View style={styles.inputView}>
+                          <Text style={styles.inputTitle}>Title:</Text>
                           <TextInput
                               style={styles.input}
                               placeholder="Add a title"
-                              value={description}
-                              onChangeText={setDescription}
+                              value={title}
+                              onChangeText={setTitle}
                           />
                           </View>
-                          <View
-                              style={{
-                                  display: "flex",
-                                  flexDirection: 'column',
-                                  marginBottom: 5
-                              }}
-                          >
-                          <Text style={{marginBottom: 3, color: "#009F93"}}>Description:</Text>
+                          <View style={styles.inputView}>
+                          <Text style={styles.inputTitle}>Description:</Text>
                           <TextInput
                               style={styles.input}
                               placeholder="Describe the task in detail"
@@ -93,26 +83,41 @@ export default function IssuesForm(){
                           />
                           </View>
                           
-                          <View
-                              style={{
-                                  display: "flex",
-                                  flexDirection: 'column',
-                                  marginBottom: 5,
-                                  zIndex:1
-                              }}
-                          >
-                          <Text style={{marginBottom: 5, color: "#009F93"}}>Status:</Text>
+                          <View style={styles.inputView}>
+                          <Text style={styles.inputTitle}>Status:</Text>
                           <DropDownPicker
                               open={open1}
                               value={type}
                               items={typeList}
                               setOpen={setOpen1}
                               setValue={setType}
+                              textStyle={{fontSize: 16, fontWeight: 300}}
+                              style={{borderWidth: 0.5}}
                           />
                           </View>
 
-                
+                          <View style={styles.inputView}>
+                            <Text style={styles.inputTitle}>Pick Due Date:</Text>
+                            <TouchableOpacity
+                                style={styles.input}
+                                onPress={() => {}}//{submitIssue()}}
+                            >
+                              <View style={{
+                                  display: "flex",
+                                  justifyContent: 'center',
+                                  flexDirection: 'row',
+                                  // marginTop: 15
+                              }}>
+                                  <Text style={{fontSize: 16, letterSpacing: 1, fontWeight: 300, flex: 1, justifyContent: 'flex-start'}}>Pick Due Date</Text>
+                                  <IconDetails name={'calendar'} color='#009F93'/>
+                                  </View>
+                          </TouchableOpacity>
                       </View>
+                      </View>
+
+                      
+                      <DatePicker/>
+
                   </View>
 
                   <View style={{
@@ -127,7 +132,7 @@ export default function IssuesForm(){
                               style={{
                                   backgroundColor: Colors.light.tint,
                                   borderRadius: 10,
-                                  padding: 5,
+                                  padding: 10,
                                   alignItems: "center"
                               }}
                               onPress={() => {}}//{submitIssue()}}
@@ -138,7 +143,7 @@ export default function IssuesForm(){
                                   flexDirection: 'row',
                                   // marginTop: 15
                               }}>
-                                  <Text style={{fontSize: 20, letterSpacing: 1, fontWeight: 400 }}>{action === "Create" ? "Submit" : "Update"}</Text>
+                                  <Text style={{fontSize: 18, letterSpacing: 1, fontWeight: 400 }}>{action === "Create" ? "Submit" : "Update"}</Text>
                               </View>
                           </TouchableOpacity>
                       </View>

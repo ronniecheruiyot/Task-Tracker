@@ -3,15 +3,8 @@ import { styles } from '../../assets/styles';
 import { useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Colors from '../../constants/Colors';
-import { RoundButton } from '../../constants/utils';
+import { IconDetails, RoundButton } from '../../constants/utils';
 import { Link } from 'expo-router';
-
-export function IconDetails(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
 
 export default function HomeScreen() {
   const [count, setCount] =useState({})
@@ -58,27 +51,27 @@ export default function HomeScreen() {
 
         <View style={{display: 'flex', flexDirection: 'row', marginVertical: 15}}>
           <View style={{display: 'flex', flexDirection: 'column', width: "50%"}}>
-            <View style={{...styles.infoCards, backgroundColor: "#edfbef"}}>
+            <View style={{...styles.infoCards}}>
                  <Text style={styles.cardTitle}>{0}</Text>
                  <Text style={[styles.cardText, {marginTop: 15, marginBottom: 8}]}>Complete</Text>
-                 <IconDetails name={'thumbs-up'} color='green'/>
+                 <IconDetails name={'thumbs-up'} color='#009F93'/>
             </View>
-            <View style={{...styles.infoCards, backgroundColor: "#edfbef"}}>
+            <View style={{...styles.infoCards}}>
                  <Text style={styles.cardTitle}>{0}</Text>
                  <Text style={[styles.cardText, {marginTop: 15, marginBottom: 8}]}>In-progress</Text>
-                 <IconDetails name={'spinner'} color='green'/>
+                 <IconDetails name={'spinner'} color='#009F93'/>
             </View>
           </View>
           <View style={{display: 'flex', flexDirection: 'column' , width: "50%" }}>
-            <View style={{...styles.infoCards, backgroundColor: "#edfbef"}}>
+            <View style={{...styles.infoCards}}>
                  <Text style={styles.cardTitle}>{0}</Text>
                  <Text style={[styles.cardText, {marginTop: 15, marginBottom: 8}]}>In-Review</Text>
-                 <IconDetails name={'hourglass-2'} color='green'/>
+                 <IconDetails name={'hourglass-2'} color='#009F93'/>
             </View>
-            <View style={{...styles.infoCards, backgroundColor: "#edfbef"}}>
+            <View style={{...styles.infoCards}}>
                  <Text style={styles.cardTitle}>{0}</Text>
                  <Text style={[styles.cardText, {marginTop: 15, marginBottom: 8}]}>Backlog</Text>
-                 <IconDetails name={'tasks'} color='green'/>
+                 <IconDetails name={'tasks'} color='#009F93'/>
             </View>
           </View>
         </View>
