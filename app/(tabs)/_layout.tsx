@@ -18,7 +18,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerTitleStyle: {marginHorizontal: 25},
+        headerTitleStyle: {marginHorizontal: 15},
         headerStyle: { backgroundColor: '#edfbef' }
         // headerShown: true,
       }}>
@@ -44,10 +44,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="taskList"
         options={{
           title: 'Tasks',
-          tabBarIcon: ({ color }) => <TabBarIcon name="pencil-square" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="file-text" color={color} />,
         }}
       />
     

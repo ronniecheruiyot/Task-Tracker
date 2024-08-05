@@ -4,6 +4,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -26,7 +27,15 @@ export default function RootLayout() {
     if (error) throw error;
   }, [error]);
 
-  return <RootLayoutNav />;
+  return (
+  <>
+    <RootLayoutNav />
+    <Toast
+        position='bottom'
+        bottomOffset={50}
+    />
+  </>
+);
 }
 
 function RootLayoutNav() {
@@ -43,7 +52,6 @@ function RootLayoutNav() {
         <Stack.Screen name="taskForm" options={{ presentation: 'modal', headerShown: true, title: 'Task' }} />
 
       </Stack>
-
     // </ThemeProvider>
   );
 }

@@ -1,17 +1,43 @@
 import React from 'react';
 import Svg, { Line } from 'react-native-svg';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, View, Image } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle, View, Image, Button, Pressable } from 'react-native';
 import { styles } from '../assets/styles';
 import Colors from './Colors';
 import Modal from "react-native-modal";
 import CalendarPicker from 'react-native-calendar-picker';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Toast from "react-native-toast-message";
+
+export const url = "https://crudcrud.com/api/cf2e0de667f6434393ca8c3ef843d356/tasks"
+
+export interface ITask {
+  _id: string;
+  date: string;
+  title: string;
+  description: string;
+  status: string;
+  dueDate: string;
+}
+
+export interface SendDataProps  {
+  "date": string;
+  "title": string,
+  "description": string,
+  "status": string,
+  "dueDate": string,
+}
 
 interface RoundButtonProps {
   title: string;
   onPress: () => void;
   size?: number;
   backgroundColor?: string;
+}
+
+interface DatePickerProps {
+  isVisible: boolean;
+  setShowDatePicker: () => void;
+  setDueDate: () => void
 }
 
 interface TextProps {
@@ -52,7 +78,7 @@ interface TextProps {
 export const RoundButton = ({
   title,
   onPress,
-  size = 60,
+  size = 50,
   backgroundColor = Colors.light.tint
 }: RoundButtonProps) => {
   return (
@@ -60,7 +86,7 @@ export const RoundButton = ({
       style={[styles.fab, { width: size, height: size, borderRadius: size / 2, backgroundColor}]}
       onPress={onPress}
     >
-      <Text style={{fontSize: 30, color: 'white',fontWeight: 300, textAlign: 'center', textAlignVertical: 'center'}}>{title}</Text>
+      <Text style={{fontSize: 32, color: 'white',fontWeight: 300, textAlign: 'center', textAlignVertical: 'center'}}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -87,25 +113,55 @@ export function NoDataFound() {
   );
 }
 
-export function DatePicker (){
-  return (
-    <>
-      <View>
-        <Modal isVisible={false}>
-          <View style={{backgroundColor: '#fff', height: '50%', paddingHorizontal: 20}}>
-            <View>
-              <CalendarPicker onDateChange={() => {}} />
-            </View>
-          </View>
-        </Modal>
-      </View>
-    </>
-  )
-}
-
 export function IconDetails(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
 }
+
+/**
+ * self-described
+ * @param item
+ */
+export const isNullUndefined = (item: string) => {
+  try {
+    return item === null || item === undefined;
+  } catch (err) {
+    return true;
+  }
+};
+
+export const isEmptyString = (value: string) => {
+  return typeof value === "string" && value.trim() === "";
+};
+
+export const errorToast = (message: string, duration = 4000) => {
+  if (!isNullUndefined(message) && !isEmptyString(message)) {
+    Toast.show({
+      type: "error",
+      text1: message,
+      visibilityTime: duration,
+    });
+  }
+};
+
+export const infoToast = (message: string, duration = 4000) => {
+  if (!isNullUndefined(message) && !isEmptyString(message)) {
+    Toast.show({
+      type: "info",
+      text1: message,
+      visibilityTime: duration,
+    });
+  }
+};
+
+export const successToast = (message: string, duration = 4000) => {
+  if (!isNullUndefined(message) && !isEmptyString(message)) {
+    Toast.show({
+      type: "success",
+      text1: message,
+      visibilityTime: duration,
+    });
+  }
+};
