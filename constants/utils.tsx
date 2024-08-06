@@ -27,6 +27,15 @@ export interface SendDataProps  {
   "dueDate": string,
 }
 
+export interface ITask1 {
+  "_id": string;
+  "date": string;
+  "title": string;
+  "description": string;
+  "status": string;
+  "dueDate": string;
+}
+
 interface RoundButtonProps {
   title: string;
   onPress: () => void;

@@ -31,7 +31,7 @@ export default function RootLayout() {
 
   return (
   <>
-    <Provider store={store}> {/* Passing redux strore */}
+    <Provider store={store}>
       <RootLayoutNav />
       <Toast
           position='bottom'

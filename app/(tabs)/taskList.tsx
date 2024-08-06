@@ -1,16 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../assets/styles';
 
-import {Text, TouchableOpacity, View, Alert, Button, Image, Platform, ScrollView} from "react-native";
+import {Text, TouchableOpacity, View, Alert, Button, Image, Platform, ScrollView, TextInput} from "react-native";
 import {useEffect, useState} from "react";
 import Modal from "react-native-modal";
-import { ITask, NoDataFound, url } from '../../constants/utils';
+import { ITask, ITask1, NoDataFound, url } from '../../constants/utils';
 import Colors from '../../constants/Colors';
 import { getData } from '../controller';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import { updateSelectedTask } from '../../state/reducers/stateSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const sendData = {
   "_id": "1",
@@ -27,12 +29,22 @@ function Icon(props: {
 }) {
   return <FontAwesome size={20} style={{ marginBottom: -3, flex: 1, justifyContent: 'flex-end'}} {...props} />;
 }
+interface ISelectedTask {
+  selectedTask: ITask1
+}
+
+interface IState {
+  taskState: ISelectedTask
+}
 
 export default function TaskListScreen() {
   const router = useRouter();
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState('');
+  const selectedTaskState = useSelector((state: IState) => state.taskState.selectedTask); //get stored selected task data using redux 
+  const dispatch = useDispatch();
 
-   useEffect(() => {
+  useEffect(() => {
     getData()
   }, [])
 
@@ -43,23 +55,37 @@ export default function TaskListScreen() {
         timeout: 30000
     }).then((response) => {
         // console.log("Get data res: ", response?.data)
-        setData(response?.data)
+        const data = response?.data
+        setData(data)
+        AsyncStorage.setItem('listOfTasks', JSON.stringify(data))
     }).catch((error) => {
         console.log("error occurred while fetching data!", error)
     })
   }
 
   const handleEditClick = (task: ITask) => {//task: ITask
+    dispatch(
+      updateSelectedTask(
+        {
+          selectedTask: task
+        }
+      )
+    )
     router.push({pathname: "/taskForm"
       , params: {action: 'Edit', selectedItem: JSON.stringify(task)}
     })
   }
 
   return (
-    <ScrollView 
-    // style={{backgroundColor: "#dbf7e0"}}
-    >
+    <ScrollView>
       <View style={styles.listContainer1}>
+        <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            value={search}
+            onChangeText={setSearch}
+            // inlineImageLeft='../../assets/images/searchIcon.svg'
+        />  
         <View style={{display: 'flex', marginVertical: 30}}>
 
           {/* Loop through the data array and render the task items */}

@@ -2,23 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     selectedTask: {
-        _id: "",
-        date: "",
-        title: "",
-        description: "",
-        status: "",
-        dueDate: "",
+        "_id": "",
+        "date": "",
+        "title": "",
+        "description": "",
+        "status": "",
+        "dueDate": "",
     }
 }
 
 export const stateSlice = createSlice({
-    name: "task-state",
+    name: "taskState",
     initialState,
     reducers: {
         updateSelectedTask: (state, action) => {
-            return {...state, ...action.payload}
+            return {
+                ...state,
+                selectedTask: action.payload.selectedTask
+            }
         },
-        removeSelectedTask: (state, action) => {
+        removeSelectedTask: () => {
             return initialState
         }
     }

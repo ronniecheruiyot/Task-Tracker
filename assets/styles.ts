@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
       borderLeftWidth: 5
     },
     dashViewCard: {
-      padding: 20,
+      padding: 15,
       borderRadius: 20,
       // alignItems: 'center',
       justifyContent: 'space-between',
@@ -113,6 +113,17 @@ export const styles = StyleSheet.create({
       letterSpacing: 1,
       borderBottomWidth: 0.5,
       marginBottom: 10
+    },
+    searchInput: {
+      borderColor: "gray",
+      width: "100%",
+      // borderWidth: 0.5,
+      borderRadius: 10,
+      padding: 5,
+      fontSize: 15,
+      letterSpacing: 1,
+      borderBottomWidth: 0.5,
+      marginTop: 15
     },
     inputTitle: {
       marginBottom: 5,

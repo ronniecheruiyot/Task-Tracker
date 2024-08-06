@@ -9,7 +9,7 @@ import { deleteItem, getData } from '../controller';
 import axios from 'axios';
 
 export default function HomeScreen() {
-  const [data, setData] =useState([])
+  const [data, setData] =useState<ITask[]>([])
   const [showIssuesForm, setShowIssuesForm] = useState(false);
   const selectedItem = {
     _id: "",
@@ -60,20 +60,20 @@ export default function HomeScreen() {
         
         <View style={{display: 'flex', marginVertical: 30, marginHorizontal: 10}}>
           <View style={styles.dashViewCard}>
-            <Text style={{fontSize: 22, fontWeight: 400, marginVertical: 5, letterSpacing: 1, color: '#009F93'}}>
+            <Text style={{fontSize: 20, fontWeight: 400, letterSpacing: 1, color: '#009F93'}}>
               Last task added on 
             </Text>
-            <Text style={{fontSize: 16, fontWeight: 400, letterSpacing: 1}}>
+            <Text style={{fontSize: 16, fontWeight: 300, letterSpacing: 1, marginTop: 5}}>
               {data.length > 0 ? data[data.length-1]?.date : ''}
             </Text>
-            <Text style={{fontSize: 15, fontWeight: 'thin', marginTop: 20, letterSpacing: 1}}>
-              {`${inProgressCount} Tasks are pending`}
+            <Text style={{fontSize: 14, fontWeight: 300, marginTop: 20, letterSpacing: 1}}>
+              {`${inProgressCount} ${inProgressCount > 1 ? "Tasks are" : "Task is"} pending`}
             </Text>
           </View>
         </View>
 
         <View style={{display: 'flex', marginHorizontal: 15}}>
-          <Text style={{fontSize: 20, fontWeight: 600, letterSpacing: 1}}>Review</Text>
+          <Text style={{fontSize: 22, fontWeight: 600, letterSpacing: 1}}>Review</Text>
         </View>
       
 
