@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
+import { store, persister } from "../state/store"
+import { Provider } from 'react-redux';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -29,11 +31,13 @@ export default function RootLayout() {
 
   return (
   <>
-    <RootLayoutNav />
-    <Toast
-        position='bottom'
-        bottomOffset={50}
-    />
+    <Provider store={store}> {/* Passing redux strore */}
+      <RootLayoutNav />
+      <Toast
+          position='bottom'
+          bottomOffset={50}
+      />
+    </Provider>
   </>
 );
 }

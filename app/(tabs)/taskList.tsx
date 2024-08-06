@@ -10,6 +10,7 @@ import { getData } from '../controller';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 
 const sendData = {
   "_id": "1",
@@ -27,7 +28,7 @@ function Icon(props: {
   return <FontAwesome size={20} style={{ marginBottom: -3, flex: 1, justifyContent: 'flex-end'}} {...props} />;
 }
 
-export default function ModalScreen() {
+export default function TaskListScreen() {
   const router = useRouter();
   const [data, setData] = useState([])
 
@@ -61,6 +62,7 @@ export default function ModalScreen() {
       <View style={styles.listContainer1}>
         <View style={{display: 'flex', marginVertical: 30}}>
 
+          {/* Loop through the data array and render the task items */}
           {data && data.map((task: ITask, i) => {
             return (
               <TouchableOpacity key={i} style={{...styles.viewCard, borderLeftColor: Colors.light.tint}} onPress={() => {handleEditClick(task)}}>
