@@ -46,9 +46,9 @@ export const styles = StyleSheet.create({
       borderRadius: 20,
       // alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: "#f5f5f5",
       marginVertical: 10,
-      elevation: 20
+      elevation: 20,
+      backgroundColor: "#f5f5f5",
     },
     infoCards: {
       padding: 15,

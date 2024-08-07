@@ -1,23 +1,35 @@
 import axios from "axios";
-import { SendDataProps, successToast } from "../constants/utils";
+import { errorToast, SendDataProps, successToast } from "../constants/utils";
 import { Alert } from "react-native";
-const url = "https://crudcrud.com/api/cf2e0de667f6434393ca8c3ef843d356/tasks"
+import { useSelector, useDispatch } from 'react-redux';
+import { updateTasks } from "../state/reducers/stateSlice";
+import {store} from '../state/store';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
- * Impliment Async strorage to store returned data
- * 
+ * CRUD CRUD API
+ * Create, Read, Update and Delete 
  */
+const url = "https://crudcrud.com/api/cf2e0de667f6434393ca8c3ef843d356/tasks"
 
-export const getData = async () => {
-    const response = await axios({
+export const getData = () => {
+    const response = axios({
         method: "GET",
         url: url, //url endpoint
         timeout: 30000
     }).then((response) => {
-        console.log("data", response?.data)
-        return (response?.data)
+        // console.log("data", response?.data)
+        const data = response?.data
+        AsyncStorage.setItem('listOfTasks', JSON.stringify(data)) //Store data locally nusing Async Storage.
+        store.dispatch(
+            updateTasks(
+              {
+                tasks: data
+              }
+            )
+          )
     }).catch((error) => {
-        console.log("error occurred while fetching data!", error)
+        errorToast(error.response.message)
     })
 
     return response
@@ -31,9 +43,10 @@ export const createTask = async (data: SendDataProps) => {
         data: data,
         timeout: 30000
     }).then(() => {
+        getData()
         successToast("Task Created Successfully")
     }).catch((error) => {
-        console.log("error occurred while creating item!", error)
+        errorToast(error.response.message)
     })
 }
 
@@ -41,10 +54,10 @@ export const updateItem = async (data: SendDataProps, id: string) => {
     // console.log("data: ", data)
      await axios.put(url + `/${id}`, data)
          .then((response) => {
-        console.log("response", response)
-        successToast("Task Updated Successfully")
+            getData()
+            successToast("Task Updated Successfully")
     }).catch((error) => {
-        console.log("error occurred while updating item!", error)
+        errorToast(error.response.message)
     })
 }
 
@@ -52,14 +65,14 @@ export const deleteItem = (id: string) => {
     // console.log("test delete", url + `/${id}`)
      axios.delete(url + `/${id}`)
          .then((response) => {
-             console.log("response", response)
-             successToast("Task Deleted Successfully")
+            getData()
+            successToast("Task Deleted Successfully")
             }).catch((error) => {
-         console.log("error occurred while deleting item!", error)
-     })
+                errorToast(error.response.message)
+            })
 }
 
-export const showAlert = (message: string, id: string) =>
+export const showAlert = (message: string, id: string, router: () => void) =>
     Alert.alert('Confirm Action', `${message}`, [
         {
         text: 'Cancel',
@@ -68,5 +81,6 @@ export const showAlert = (message: string, id: string) =>
         },
         {text: 'OK', onPress: () => {
             deleteItem(id);
+            router
         }},
     ]);

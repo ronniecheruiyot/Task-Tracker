@@ -3,13 +3,14 @@ import { styles } from '../../assets/styles';
 import { useEffect, useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Colors from '../../constants/Colors';
-import { IconDetails, ITask, RoundButton, url } from '../../constants/utils';
+import { IconDetails, IState, ITask, RoundButton, url } from '../../constants/utils';
 import { Link, useRouter } from 'expo-router';
 import { deleteItem, getData } from '../controller';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function HomeScreen() {
-  const [data, setData] =useState<ITask[]>([])
+  // const [data, setData] =useState<ITask[]>([])
   const [showIssuesForm, setShowIssuesForm] = useState(false);
   const selectedItem = {
     _id: "",
@@ -19,19 +20,7 @@ export default function HomeScreen() {
     dueDate: ""
   }
   const router = useRouter();
-
-  const getData = async() => {
-    await axios({
-        method: "GET",
-        url: url, //url endpoint
-        timeout: 30000
-    }).then((response) => {
-        // console.log("Get data res: ", response?.data)
-        setData(response?.data)
-    }).catch((error) => {
-        console.log("error occurred while fetching data!", error)
-    })
-  }
+  const taskList: ITask[] = useSelector((state: IState) => state.taskState.tasks); //get stored selected task data using redux 
 
   useEffect(() => {
     getData()
@@ -41,10 +30,10 @@ export default function HomeScreen() {
     router.push({pathname: "/taskForm", params: {action: 'Create', selectedItem: JSON.stringify(selectedItem)}})
   }
 
-  const inProgressCount = data.filter((task: ITask) => task.status === "In-Progress").length
-  const inReviewCount = data.filter((task: ITask) => task.status === "In-Review").length
-  const completedCount = data.filter((task: ITask) => task.status === "Complete").length
-  const backlogCount = data.filter((task: ITask) => task.status === "Backlog").length
+  const inProgressCount = taskList.filter((task: ITask) => task.status === "In-Progress").length
+  const inReviewCount = taskList.filter((task: ITask) => task.status === "In-Review").length
+  const completedCount = taskList.filter((task: ITask) => task.status === "Complete").length
+  const backlogCount = taskList.filter((task: ITask) => task.status === "Backlog").length
 
 
   return (
@@ -61,10 +50,10 @@ export default function HomeScreen() {
         <View style={{display: 'flex', marginVertical: 30, marginHorizontal: 10}}>
           <View style={styles.dashViewCard}>
             <Text style={{fontSize: 20, fontWeight: 400, letterSpacing: 1, color: '#009F93'}}>
-              Last task added on 
+              {taskList.length > 0 ? `Last task added on` : `No Tasks added yet`} 
             </Text>
             <Text style={{fontSize: 16, fontWeight: 300, letterSpacing: 1, marginTop: 5}}>
-              {data.length > 0 ? data[data.length-1]?.date : ''}
+              {taskList.length > 0 ? taskList[taskList.length-1]?.date : ''}
             </Text>
             <Text style={{fontSize: 14, fontWeight: 300, marginTop: 20, letterSpacing: 1}}>
               {`${inProgressCount} ${inProgressCount > 1 ? "Tasks are" : "Task is"} pending`}

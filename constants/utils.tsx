@@ -36,6 +36,15 @@ export interface ITask1 {
   "dueDate": string;
 }
 
+export interface ISelectedTask {
+  selectedTask: ITask1
+  tasks: []
+}
+
+export interface IState {
+  taskState: ISelectedTask;
+}
+
 interface RoundButtonProps {
   title: string;
   onPress: () => void;

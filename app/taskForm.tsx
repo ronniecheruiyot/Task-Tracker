@@ -16,7 +16,7 @@ export default function IssuesForm(){
     const params = useLocalSearchParams();
     const { action, selectedItem } = params;
     const details = selectedItem ? JSON.parse(selectedItem) : {};
-    console.log("edit data", details)
+    // console.log("edit data", details)
 
     const [title, setTitle] = useState(action === "Edit" ? details?.title : '')
     const [description, setDescription] = useState(action === "Edit" ? details?.description : '')
@@ -76,12 +76,16 @@ export default function IssuesForm(){
         console.log("sendData", sendData)
         if(action === "Create"){ //Create entry
             if(formValidation()) {
-                createTask(sendData)
+                createTask(sendData).then(() => {
+                    router.push({pathname: "/taskList" })
+                })
             };
         }
         else{ //Update
             if(formValidation()) {
-                updateItem(sendData, details?._id)
+                updateItem(sendData, details?._id).then(() => {
+                    router.push({pathname: "/taskList" })
+                })
             };
         }
     }
@@ -195,7 +199,7 @@ export default function IssuesForm(){
                                   padding: 10,
                                   alignItems: "center"
                               }}
-                              onPress={() => {showAlert("Do you want to delete this task", details?._id)}}
+                              onPress={() => {showAlert("Do you want to delete this task", details?._id), router.push({pathname: "/taskList"})}}
                           >
                               <View style={{
                                   display: "flex",

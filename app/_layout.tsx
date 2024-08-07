@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
-import { store, persister } from "../state/store"
+import { store } from "../state/store"
 import { Provider } from 'react-redux';
 
 export {
@@ -53,8 +53,6 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', headerShown: true, title: 'Settings' }} />
-        <Stack.Screen name="taskForm" options={{ presentation: 'modal', headerShown: true, title: 'Task' }} />
-
       </Stack>
     // </ThemeProvider>
   );
