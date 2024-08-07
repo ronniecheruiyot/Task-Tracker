@@ -1,5 +1,5 @@
 # Task Tracker App
-An app that one can use to track tasks with different status
+An app that keeps track of tasks
 
 ## Setup & running locally
 Once you have successfully pulled the code from the repository 
