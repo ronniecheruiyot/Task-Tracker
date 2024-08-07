@@ -61,9 +61,9 @@ export const updateItem = async (data: SendDataProps, id: string) => {
     })
 }
 
-export const deleteItem = (id: string) => {
+export const deleteItem = async(id: string) => {
     // console.log("test delete", url + `/${id}`)
-     axios.delete(url + `/${id}`)
+     await axios.delete(url + `/${id}`)
          .then((response) => {
             getData()
             successToast("Task Deleted Successfully")
