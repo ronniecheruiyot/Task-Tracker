@@ -35,6 +35,15 @@ export default function HomeScreen() {
   const completedCount = taskList.filter((task: ITask) => task.status === "Complete").length
   const backlogCount = taskList.filter((task: ITask) => task.status === "Backlog").length
 
+  const time = new Date().getHours();
+  let greeting;
+  if (time < 12) {
+    greeting = "Good Morning";
+  } else if (time < 17) {
+    greeting = "Good Afternoon";
+  } else {
+    greeting = "Good evening";
+  }
 
   return (
     <>
@@ -43,7 +52,7 @@ export default function HomeScreen() {
     >
       <View style={styles.container}>
         <View style={{display: 'flex', marginHorizontal: 15}}>
-          <Text style={{fontSize: 25, fontWeight: 700, letterSpacing: 1}}>Good Morning</Text>
+          <Text style={{fontSize: 25, fontWeight: 700, letterSpacing: 1}}>{greeting}</Text>
           <Text style={{...styles.title1, marginTop: 5, letterSpacing: 1}}>Jane Doe</Text>
         </View>
         
