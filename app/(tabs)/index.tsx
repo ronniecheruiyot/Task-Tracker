@@ -36,7 +36,7 @@ export default function HomeScreen() {
   const backlogCount = taskList.filter((task: ITask) => task.status === "Backlog").length
 
   const time = new Date().getHours();
-  let greeting;
+  let greeting: string;
   if (time < 12) {
     greeting = "Good Morning";
   } else if (time < 17) {
