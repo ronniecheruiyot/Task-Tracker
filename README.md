@@ -1,6 +1,9 @@
 # Task Tracker App
 An app that keeps track of tasks
 
+![Screenshot 2024-08-08 105349](https://github.com/user-attachments/assets/42742bb7-6dba-47a4-99ff-c647e0df2e35)
+
+
 ## Setup & running locally
 Once you have successfully pulled the code from the repository 
 run `npm install` from your root directory to install dependencies (ensure that your node version matches the one articulated in `.nvmrc`)  
