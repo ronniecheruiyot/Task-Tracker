@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import Modal from "react-native-modal";
 import { IState, ITask, ITask1, NoDataFound, url } from '../../constants/utils';
 import Colors from '../../constants/Colors';
-import { getData } from '../controller';
+import { getData } from '../../controllers/controller';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
 import axios from 'axios';

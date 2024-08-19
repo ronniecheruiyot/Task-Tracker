@@ -7,7 +7,7 @@ import { useNavigation, useRouter, useLocalSearchParams } from "expo-router";
 import Colors from "../constants/Colors";
 import CalendarPicker from "react-native-calendar-picker";
 import { errorToast, IconDetails, infoToast, isEmptyString, SendDataProps, successToast } from "../constants/utils";
-import { createTask, deleteItem, showAlert, updateItem } from "./controller";
+import { createTask, deleteItem, showAlert, updateItem } from "../controllers/controller";
 import axios from "axios";
 
 export default function IssuesForm(){

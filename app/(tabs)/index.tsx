@@ -5,7 +5,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Colors from '../../constants/Colors';
 import { IconDetails, IState, ITask, RoundButton, url } from '../../constants/utils';
 import { Link, useRouter } from 'expo-router';
-import { deleteItem, getData } from '../controller';
+import { deleteItem, getData } from '../../controllers/controller';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
